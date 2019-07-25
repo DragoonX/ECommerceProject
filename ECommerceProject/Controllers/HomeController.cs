@@ -18,6 +18,9 @@ namespace ECommerceProject.Controllers
                 //using kullanımı ile komut kullanılmadığında garbage collector ile atılır.
                 List<User> users = eCommerceContext.Users.Include(a => a.Addresses).ToList();
                 List<Address> address = eCommerceContext.Addresses.Include(b => b.User).ToList();
+
+                //Commit edilecek kısım burası olacak. << GitHub için.
+
             }
                 return View();
         }
