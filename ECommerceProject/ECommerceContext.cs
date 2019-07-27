@@ -26,10 +26,42 @@ namespace ECommerceProject
         {
             //Veritabanını otomatik olarak oluşturur. Buraya özel kurallar yazılır.
             //Database şeması uygulanırken kullanılacak kural setleri burada tanımlanır.
+
+            modelBuilder.Entity<Category>().HasData(new Category() {
+                Id=1,
+                Name="Elektronik",
+                Description="Ev elektriğine dair herşey."
+            });
+            modelBuilder.Entity<Category>().HasData(new Category()
+            {
+                Id = 2,
+                Name = "Beyaz Eşya",
+                Description = "Mutfak Elektroniği."
+            });
+            modelBuilder.Entity<Category>().HasData(new Category()
+            {
+                Id = 3,
+                Name = "Tekstil",
+                Description = "Gardroplar için eşyalar"
+            });
+            modelBuilder.Entity<State>().HasData(new State()
+            {
+                Id = 1,
+                Name = "Aktif"
+            });
+            modelBuilder.Entity<State>().HasData(new State()
+            {
+                Id = 2,
+                Name = "Pasif"
+            });
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<State> States { get; set; }
 
     }
 }

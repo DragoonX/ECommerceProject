@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceProject.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20190725181815_NewMig")]
-    partial class NewMig
+    [Migration("20190727073705_State")]
+    partial class State
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,52 @@ namespace ECommerceProject.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("ECommerceProject.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<int?>("StateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new { Id = 1, Description = "Ev elektriğine dair herşey.", Name = "Elektronik" },
+                        new { Id = 2, Description = "Mutfak Elektroniği.", Name = "Beyaz Eşya" },
+                        new { Id = 3, Description = "Gardroplar için eşyalar", Name = "Tekstil" }
+                    );
+                });
+
+            modelBuilder.Entity("ECommerceProject.Models.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("States");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Aktif" },
+                        new { Id = 2, Name = "Pasif" }
+                    );
                 });
 
             modelBuilder.Entity("ECommerceProject.Models.User", b =>
@@ -70,6 +116,13 @@ namespace ECommerceProject.Migrations
                     b.HasOne("ECommerceProject.Models.User", "User")
                         .WithMany("Addresses")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ECommerceProject.Models.Category", b =>
+                {
+                    b.HasOne("ECommerceProject.Models.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId");
                 });
 #pragma warning restore 612, 618
         }
