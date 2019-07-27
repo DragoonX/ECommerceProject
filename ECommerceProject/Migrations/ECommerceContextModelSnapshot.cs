@@ -64,6 +64,34 @@ namespace ECommerceProject.Migrations
                     );
                 });
 
+            modelBuilder.Entity("ECommerceProject.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<DateTime>("CreateDate");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120);
+
+                    b.Property<int>("StateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("Products");
+                });
+
             modelBuilder.Entity("ECommerceProject.Models.State", b =>
                 {
                     b.Property<int>("Id")
@@ -121,6 +149,19 @@ namespace ECommerceProject.Migrations
                     b.HasOne("ECommerceProject.Models.State", "State")
                         .WithMany()
                         .HasForeignKey("StateId");
+                });
+
+            modelBuilder.Entity("ECommerceProject.Models.Product", b =>
+                {
+                    b.HasOne("ECommerceProject.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ECommerceProject.Models.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

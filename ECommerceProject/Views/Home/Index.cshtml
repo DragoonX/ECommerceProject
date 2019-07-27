@@ -1,1 +1,6 @@
-﻿içerik
+﻿@model List<Category>
+içerik
+<p>
+    <a href="@Url.Action("Help","Home")">Yardım Masasına Git</a>
+</p>
+@{await Html.RenderPartialAsync("_Partial_Categories");}

@@ -13,31 +13,21 @@ namespace ECommerceProject.Controllers
     {
         public IActionResult Index()
         {
-            using (ECommerceContext eCommerceContext = new ECommerceContext()) //vt bağlantısı yapıldı.
-            {
-                //using kullanımı ile komut kullanılmadığında garbage collector ile atılır.
-                List<User> users = eCommerceContext.Users.Include(a => a.Addresses).ToList();
-                List<Address> address = eCommerceContext.Addresses.Include(b => b.User).ToList();
-            }
-                return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Title"] = "Hoşgeldiniz";
 
             return View();
         }
+
+        public IActionResult Help()
+        {
+            ViewData["Title"] = "Yardım Masası";
+            return View();
+        }
+        //yeni bir view eklemek için IActionResult eklemek gerek.
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            ViewData["Title"] = "İletişim";
             return View();
         }
 
