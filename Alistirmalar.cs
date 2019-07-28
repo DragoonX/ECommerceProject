@@ -6,43 +6,42 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            RepeatN("Anılcan","Şaşkın",4);
-
-
-            //int[] cx = new int[] { 12,22,45,-13};
-            //orderArray(cx);
-
+            //1. Cevap
+            RepeatN("İsim", "Soyisim", 4);
             Console.WriteLine();
-            revStr("Transatlantik");
 
-            //arrlist(new int[] {11,22,41,1234,123,11,234,55 });
+            //2. Cevap
+            orderArray(new int[] { 12,22,45,-13 });
+            Console.WriteLine();
 
+            //3. Cevap
+            revStr("DenemeCümle");
+            Console.WriteLine();
+
+            //4. Cevap
+            arrlist(new int[] {11,22,41,1234,123,11,234,55 });
+            Console.WriteLine();
+
+            //5. Cevap
             days();
 
-            Console.Read();
+            //6. Cevap
         }
 
         public static void RepeatN(string ad, string soyad, int say)
         {
-            for(int i = 0; i < say; i++)
+            for (int i = 0; i < say; i++)
             {
                 Console.Write(ad + " " + soyad + " ");
             }
         }
         public static void orderArray(int[] dizi)
         {
-            int x = 0;
-            for (int y = 0; y < dizi.Length; y++)
+            Array.Sort(dizi);
+            foreach (var i in dizi)
             {
-                if (dizi[y]< dizi[y+1])
-                {
-                    x = dizi[y];
-                    dizi[y] = dizi[y + 1];
-                    dizi[y + 1] = x;
-                }
+                Console.Write(i+" ");
             }
-            Console.WriteLine(dizi);
         }
 
         public static void revStr(string a)
@@ -58,37 +57,21 @@ namespace ConsoleApp1
 
         public static void arrlist(int[] arr)
         {
-            int[] newarr = new int[] { };
-
-            newarr[0] = arr[0];
-            newarr[1] = arr[1];
-            newarr[2] = arr[arr.Length - 1];
-            newarr[3] = arr[arr.Length];
-
-            Console.WriteLine(newarr);
+            Console.Write(arr[0]+","+arr[1] + "," + arr[arr.Length-2] + ","+ arr[arr.Length - 1]);
         }
 
         public static void days()
         {
-            DayOfWeek today = DateTime.Today.DayOfWeek;
-        Console.WriteLine("Today is {0}",
-            today);
+            DateTime now = DateTime.Today;
 
-        // Test current day of week.
-        if (today == DayOfWeek.Monday)
-        {
-            Console.WriteLine("DO WORK");
-        }
-
-        // Demonstrate all DayOfWeek values.
-        Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}",
-            DayOfWeek.Monday,
-            DayOfWeek.Tuesday,
-            DayOfWeek.Wednesday,
-            DayOfWeek.Thursday,
-            DayOfWeek.Friday,
-            DayOfWeek.Saturday,
-            DayOfWeek.Sunday);
+            for (int i = 0; i < 7; i++)
+            {
+                if (now == DateTime.Today)
+                    Console.Write("BUGÜN ");
+                else
+                    Console.Write(now.ToString("dddd") + " ");
+                now = now.AddDays(1);
+            }
 
         }
     }
